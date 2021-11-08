@@ -29,11 +29,14 @@ def solveSudoku(grid, solution):
         return True
     for i in range(1,10):
         if notInRow(grid,r,i) and notInCol(grid,c,i) and notInSquare(grid,r,c,i):
+            # ping visualization here to update visual
             grid[r][c] = i
-            if solveSudoku(list.copy(grid),solution):
+            if solveSudoku(grid,solution):
                 print(f"filling space {r},{c} with {i}")
+                # ping visualization here to show final grid filling
                 return True
             grid[r][c] = 0
+            # ping visualization here to update visual
     return False
 
 def main():
@@ -51,7 +54,12 @@ def main():
     if not result:
         print("No Solution!")
     else:
-        for row in solution:
-            for val in row:
+        print("-----------------------")
+        for i, row in enumerate(solution):
+            for j,val in enumerate(row):
                 print(val,end=" ")
-            print("\n")
+                if (j+1) % 3 == 0:
+                    print("|", end = " ") #todo: make the grid printing less gross
+            print("")
+            if (i+1) % 3 == 0:
+                print("-----------------------")
