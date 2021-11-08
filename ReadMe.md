@@ -4,7 +4,7 @@ Todo list:
 
 X Working solver algorithm
 
-_ Test algorithm on edge cases
+_ Handle long runtime for unsolvable puzzles
 
 _ GUI sudoku input
 
