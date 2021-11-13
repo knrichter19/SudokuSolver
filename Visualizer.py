@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class Visualizer:
-    solver = None  # todo: make connection between these
+    solver = None
 
     def __init__(self, solver):
         self.solving = False

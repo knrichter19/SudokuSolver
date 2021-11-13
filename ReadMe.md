@@ -4,7 +4,7 @@ Todo list:
 
 X Working solver algorithm
 
-_ GUI sudoku input
+X GUI sudoku input
 
 _ GUI algorithm visualization
 
