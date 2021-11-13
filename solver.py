@@ -49,8 +49,8 @@ class Solver():
         return -1, -1
 
     def solveSudoku(self, grid, solution):
-        if self.gui:
-            time.sleep(.01)
+        #if self.gui:
+            #time.sleep(.01)
 
         r, c = self.firstEmpty(grid)  # get first empty location of the grid
         if r < 0:  # if no empty spaces:

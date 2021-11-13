@@ -61,17 +61,17 @@ class Visualizer:
 
     def fixValue(self, row, col):
         print("Fix value called")
-        self.buttonGrid[row][col].configure(bg="green")
+        #self.buttonGrid[row][col].configure(bg="green")
 
     def testValue(self, row, col, value):
         print("Test Value called")
         self.buttonGrid[row][col].insert("1.0", str(value))
-        self.buttonGrid[row][col].configure(bg="red")
+        #self.buttonGrid[row][col].configure(bg="red")
 
     def clearValue(self, row, col):
         print("Clear value called")
         self.buttonGrid[row][col].delete("1.0", tk.END)
-        self.buttonGrid[row][col].configure(bg="white")
+        #self.buttonGrid[row][col].configure(bg="white")
 
     def reset(self):
         for i in range(9):
