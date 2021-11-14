@@ -28,7 +28,9 @@ class Visualizer:
             sudokuFrame.rowconfigure(i, weight=1, minsize=3)
             row = []
             for j in range(9):
-                sudokuSquare = tk.Text(sudokuFrame, bg="white")
+                sudokuSquare = tk.Text(sudokuFrame, bg="white", font=("Helvitica", 20))
+                sudokuSquare.tag_configure("centered", justify="center")
+                sudokuSquare.tag_add("centered", "1.0", "end")
                 row.append(sudokuSquare)
                 sudokuSquare.grid(column=j, row=i)
             self.buttonGrid.append(row)
@@ -61,17 +63,20 @@ class Visualizer:
 
     def fixValue(self, row, col):
         print("Fix value called")
-        #self.buttonGrid[row][col].configure(bg="green")
+        self.buttonGrid[row][col].configure(bg="green")
+        self.root.update_idletasks()
 
     def testValue(self, row, col, value):
         print("Test Value called")
-        self.buttonGrid[row][col].insert("1.0", str(value))
-        #self.buttonGrid[row][col].configure(bg="red")
+        self.buttonGrid[row][col].insert("1.0", str(value), "centered")
+        self.buttonGrid[row][col].configure(bg="red")
+        self.root.update_idletasks()
 
     def clearValue(self, row, col):
         print("Clear value called")
         self.buttonGrid[row][col].delete("1.0", tk.END)
-        #self.buttonGrid[row][col].configure(bg="white")
+        self.buttonGrid[row][col].configure(bg="white")
+        self.root.update_idletasks()
 
     def reset(self):
         for i in range(9):
@@ -81,3 +86,5 @@ class Visualizer:
     def start(self):
         self.root.mainloop()
 
+    def doneSolving(self):
+        self.solving = False

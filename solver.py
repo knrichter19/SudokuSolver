@@ -49,8 +49,8 @@ class Solver():
         return -1, -1
 
     def solveSudoku(self, grid, solution):
-        #if self.gui:
-            #time.sleep(.01)
+        if self.gui:
+            time.sleep(.03)
 
         r, c = self.firstEmpty(grid)  # get first empty location of the grid
         if r < 0:  # if no empty spaces:
@@ -66,6 +66,7 @@ class Solver():
                 if self.solveSudoku(grid, solution):
                     if self.gui:
                         self.gui.fixValue(r,c)
+                        self.gui.doneSolving()
                     # ping visualization here to show final grid filling
                     return True
                 print(f"({r},{c}) = {0}")
