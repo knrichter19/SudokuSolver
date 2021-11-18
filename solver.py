@@ -4,6 +4,7 @@ class Solver():
 
     def __init__(self):
         self.gui = None
+        self.guiSpeed = .02
 
     def addVisualizer(self, gui):
         self.gui = gui
@@ -20,12 +21,30 @@ class Solver():
                 print("-----------------------")
 
     def validGrid(self, grid):
-        for row in grid:
-            if set(row) != (1, 2, 3, 4, 5, 6, 7, 8, 9):
-                return False
+        """makes sure grid is a solvable sudoku by checking the validity of each square"""
+        for i in range(9):
+            for j in range(9):
+                val = grid[i][j]
+                print(val)
+                # loop through all possible options (after adjusting funcs)
+                # if no options: return false
+                # elif val not in options: return false
+                if val and not (self.notInRow(grid,i,val) and self.notInCol(grid,j,val) and self.notInSquare(grid,i,j,val)):
+                    # todo: exclude current index from checks
+                    # returns false if conflicting values within a row, col, or 3x3 square
+                    return False
+
+                elif not val:
+                    options = [testNum for testNum in range(1,10) if (self.notInRow(grid,i,testNum) and self.notInCol(grid,j,testNum) and self.notInSquare(grid,i,j,testNum))]
+                    print(options)
+                    if not options:
+                        # returns false if there's no valid number for a given square
+                        return False
+        return True
         # todo: better checks for validity
 
     def notInRow(self, grid, rowIndex, value):
+        """Returns whether the value is found in the same row as the given rowIndex"""
         return value not in grid[rowIndex]
 
     def notInCol(self, grid, colIndex, value):
@@ -48,13 +67,13 @@ class Solver():
                     return i, j
         return -1, -1
 
-    def solveSudoku(self, grid, solution):
+    def solveSudoku(self, grid):
         if self.gui:
-            time.sleep(.03)
+            time.sleep(self.guiSpeed)
 
         r, c = self.firstEmpty(grid)  # get first empty location of the grid
         if r < 0:  # if no empty spaces:
-            solution.extend(grid)
+            #solution.extend(grid)
             return True
         for i in range(1, 10):
             if self.notInRow(grid, r, i) and self.notInCol(grid, c, i) and self.notInSquare(grid, r, c, i):
@@ -63,7 +82,7 @@ class Solver():
                     self.gui.testValue(r,c,i)
                 # ping visualization here to update visual
                 grid[r][c] = i
-                if self.solveSudoku(grid, solution):
+                if self.solveSudoku(grid):
                     if self.gui:
                         self.gui.fixValue(r,c)
                         self.gui.doneSolving()
@@ -89,9 +108,9 @@ def main():
                   [0, 0, 6, 0, 0, 0, 0, 0, 0]]
     s.printGrid(sudokuGrid)
     solution = []
-    result = s.solveSudoku(sudokuGrid, solution)
+    result = s.solveSudoku(sudokuGrid)
     if not result:
         print("No Solution!")
     else:
         print("Solved:")
-        s.printGrid(solution)
+        s.printGrid(sudokuGrid)

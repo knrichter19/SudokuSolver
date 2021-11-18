@@ -7,17 +7,15 @@ class Visualizer:
     def __init__(self, solver):
         self.solving = False
 
-        # if type(solver) != "Solver":
-        #     raise TypeError("solver parameter must be a Solver-type object")
         self.solver = solver
 
         self.root = tk.Tk()
         self.root.geometry("500x700")
         buttonFrame = tk.Frame(self.root, width=500, height=200, bg="blue")
         buttonFrame.pack(side=tk.BOTTOM)
-        solveButton = tk.Button(buttonFrame, width=10, height=5, command=self.solve)
+        solveButton = tk.Button(buttonFrame, width=10, height=5, command=self.solve, text = "Solve")
         solveButton.pack()
-        resetButton = tk.Button(buttonFrame, width=10, height=5, command=self.reset)
+        resetButton = tk.Button(buttonFrame, width=10, height=5, command=self.reset, text = "Reset")
         resetButton.pack()
 
         self.buttonGrid = []
@@ -53,13 +51,17 @@ class Visualizer:
     def solve(self):
         if not self.solver:
             raise AttributeError("Solver not initialized for Visualizer object")
-        self.solving = True
+
         self.extractText()
-        solution = []
-        self.solver.solveSudoku(self.grid, solution)
-        self.solving = False
-        self.grid = solution
-        print(solution)
+        if not self.solver.validGrid(self.grid):
+            print("Unsolvable grid!")
+            # todo: make this a popup
+        else:
+            solution = []
+            self.solving = True
+            self.solver.solveSudoku(self.grid)
+            self.solving = False
+            print(self.grid)
 
     def fixValue(self, row, col):
         print("Fix value called")
@@ -88,3 +90,5 @@ class Visualizer:
 
     def doneSolving(self):
         self.solving = False
+
+
