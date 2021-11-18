@@ -13,3 +13,5 @@ _ Handle long runtime for unsolvable puzzles
 _ More efficient algorithm (handles previous step?)
 
 _ Toggle visualization of algorithm
+
+_ Fix visualization freezing
