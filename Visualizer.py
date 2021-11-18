@@ -15,10 +15,11 @@ class Visualizer:
         buttonFrame.pack(side=tk.BOTTOM)
         solveButton = tk.Button(buttonFrame, width=10, height=5, command=self.solve, text = "Solve")
         solveButton.pack()
+        visualButton = tk.Button(buttonFrame, width=10, height=5, command=lambda: self.solve(visual=True),
+                                 text="Solve (visual, slow)")
+        visualButton.pack()
         resetButton = tk.Button(buttonFrame, width=10, height=5, command=self.reset, text = "Reset")
         resetButton.pack()
-
-        #visualButton = tk.Button(buttonFrame, width=15, height=5, command=lambda : self.solve(visual = True), text = "Solve (visual)")
 
         self.buttonGrid = []
         self.grid = []
@@ -51,37 +52,44 @@ class Visualizer:
         print(grid)
 
     def solve(self, visual = False):
+        # print("Visual:", visual)
         if not self.solver:
             raise AttributeError("Solver not initialized for Visualizer object")
 
         self.extractText()
         if not self.solver.validGrid(self.grid):
-            print("Unsolvable grid!")
+            # print("Unsolvable grid!")
             tk.messagebox.showerror(message="Unsolveable Grid!")
-            # todo: make this a popup
         else:
             solution = []
             self.solving = True
-            self.solver.solveSudoku(self.grid)
+            self.solver.solveSudoku(self.grid, visual=visual)
             self.solving = False
-            print(self.grid)
+            if not visual:
+                self.setAllValues(self.grid)
 
     def fixValue(self, row, col):
-        print("Fix value called")
+        # print("Fix value called")
         self.buttonGrid[row][col].configure(bg="green")
         self.root.update_idletasks()
 
     def testValue(self, row, col, value):
-        print("Test Value called")
+        # print("Test Value called")
         self.buttonGrid[row][col].insert("1.0", str(value), "centered")
         self.buttonGrid[row][col].configure(bg="red")
         self.root.update_idletasks()
 
     def clearValue(self, row, col):
-        print("Clear value called")
+        # print("Clear value called")
         self.buttonGrid[row][col].delete("1.0", tk.END)
         self.buttonGrid[row][col].configure(bg="white")
         self.root.update_idletasks()
+
+    def setAllValues(self, grid):
+        for i in range(9):
+            for j in range(9):
+                self.buttonGrid[i][j].delete("1.0", tk.END)
+                self.buttonGrid[i][j].insert("1.0", str(grid[i][j]), "centered")
 
     def reset(self):
         for i in range(9):

@@ -26,7 +26,6 @@ class Solver():
         for i in range(9):
             for j in range(9):
                 val = grid[i][j]
-                print(val)
                 grid[i][j] = 0
                 # removed val from grid to test options properly,
                 # since notIn___() returns false for the value at the current index
@@ -66,8 +65,8 @@ class Solver():
                     return i, j
         return -1, -1
 
-    def solveSudoku(self, grid):
-        if self.gui:
+    def solveSudoku(self, grid, visual = False):
+        if self.gui and visual:
             time.sleep(self.guiSpeed)
 
         r, c = self.firstEmpty(grid)  # get first empty location of the grid
@@ -76,20 +75,21 @@ class Solver():
             return True
         for i in range(1, 10):
             if self.notInRow(grid, r, i) and self.notInCol(grid, c, i) and self.notInSquare(grid, r, c, i):
-                print(f"({r},{c}) = {i}")
-                if self.gui:
+                # print(f"({r},{c}) = {i}")
+                if self.gui and visual:
                     self.gui.testValue(r, c, i)
                 # ping visualization here to update visual
                 grid[r][c] = i
-                if self.solveSudoku(grid):
-                    if self.gui:
+                if self.solveSudoku(grid, visual = visual):
+                    if self.gui and visual:
                         self.gui.fixValue(r, c)
                         self.gui.doneSolving()
                     # ping visualization here to show final grid filling
                     return True
-                print(f"({r},{c}) = {0}")
+                # print(f"({r},{c}) = {0}")
                 grid[r][c] = 0
-                self.gui.clearValue(r, c)
+                if self.gui and visual:
+                    self.gui.clearValue(r, c)
                 # ping visualization here to update visual
         return False
 

@@ -8,10 +8,14 @@ X GUI sudoku input
 
 X GUI algorithm visualization
 
-_ Handle long runtime for unsolvable puzzles
+X Catch unsolvable puzzles? (some at least)
 
-_ More efficient algorithm (handles previous step?)
+X Reorganize buttons
 
-_ Toggle visualization of algorithm
+_ Handle long runtimes
 
-_ Fix visualization freezing
+_ More efficient algorithm (fixes previous step?)
+
+X Toggle visualization of algorithm
+
+_ Fix visualization freezing (threading?)
