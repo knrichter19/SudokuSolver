@@ -1,5 +1,5 @@
 import tkinter as tk
-
+from tkinter import messagebox
 
 class Visualizer:
     solver = None
@@ -17,6 +17,8 @@ class Visualizer:
         solveButton.pack()
         resetButton = tk.Button(buttonFrame, width=10, height=5, command=self.reset, text = "Reset")
         resetButton.pack()
+
+        #visualButton = tk.Button(buttonFrame, width=15, height=5, command=lambda : self.solve(visual = True), text = "Solve (visual)")
 
         self.buttonGrid = []
         self.grid = []
@@ -48,13 +50,14 @@ class Visualizer:
         self.grid = grid
         print(grid)
 
-    def solve(self):
+    def solve(self, visual = False):
         if not self.solver:
             raise AttributeError("Solver not initialized for Visualizer object")
 
         self.extractText()
         if not self.solver.validGrid(self.grid):
             print("Unsolvable grid!")
+            tk.messagebox.showerror(message="Unsolveable Grid!")
             # todo: make this a popup
         else:
             solution = []

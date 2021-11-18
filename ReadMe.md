@@ -6,8 +6,10 @@ X Working solver algorithm
 
 X GUI sudoku input
 
-? GUI algorithm visualization
+X GUI algorithm visualization
 
 _ Handle long runtime for unsolvable puzzles
 
-_ Check for algorithm optimizations/alternative solving methods
+_ More efficient algorithm (handles previous step?)
+
+_ Toggle visualization of algorithm
