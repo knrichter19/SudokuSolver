@@ -14,7 +14,7 @@ If you just want the answers as fast as possible, clicking the [Solve] button wi
 
 **Step 2b:**
 
-To visualize how the backtracking algorithm works, clicking the [Visualize] button will fill in the digits more slowly, showing them as red when the algorithm is testing possibilities, and green when the algorithm determines that the digit is completely valid.
+To visualize how the backtracking algorithm works, clicking the [Solve (visual,slow)] button will fill in the digits more slowly, showing them as red when the algorithm is testing possibilities, and green when the algorithm determines that the digit is completely valid.
 
 ![step3](https://user-images.githubusercontent.com/70418659/143287086-4175f4ca-0aad-4cfa-bf3b-e8cafa555983.PNG)
 
