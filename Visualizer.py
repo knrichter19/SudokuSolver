@@ -10,16 +10,17 @@ class Visualizer:
         self.solver = solver
 
         self.root = tk.Tk()
+        self.root.title("Sudoku Solver")
         self.root.geometry("500x700")
         buttonFrame = tk.Frame(self.root, width=500, height=200, bg="blue")
         buttonFrame.pack(side=tk.BOTTOM)
         solveButton = tk.Button(buttonFrame, width=10, height=5, command=self.solve, text = "Solve")
-        solveButton.pack()
-        visualButton = tk.Button(buttonFrame, width=10, height=5, command=lambda: self.solve(visual=True),
+        solveButton.grid(column=0, row=0)
+        visualButton = tk.Button(buttonFrame, width=30, height=5, command=lambda: self.solve(visual=True),
                                  text="Solve (visual, slow)")
-        visualButton.pack()
+        visualButton.grid(column=1, row=0)
         resetButton = tk.Button(buttonFrame, width=10, height=5, command=self.reset, text = "Reset")
-        resetButton.pack()
+        resetButton.grid(column=2, row=0)
 
         self.buttonGrid = []
         self.grid = []
